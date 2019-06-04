@@ -115,6 +115,48 @@ int get_priority(string op)
 	if (op == "^")
 		return 1;
 }
+node* calculate(string expr){
+	stack* operators = nullptr;
+	stack* output = nullptr;
+	expr = delete_space(expr);
+	int i = 0;
+	while (expr[i] != '\0'){
+		if ((expr[i] >= '0' && expr[i] <= '9') || (expr[i] >= 'a' && expr[i] <= 'z')){
+			string num = "";
+			while ((expr[i] >= '0' && expr[i] <= '9') || (expr[i] >= 'a' && expr[i] <= 'z') || expr[i] == '.'){
+				num += expr[i];
+				i++;
+			}
+			push_str(&output, num);
+			i--;
+		}
+		else if (get_op(expr[i]) != ""){
+			string op = get_op(expr[i]);{
+				int p = get_priority(op);
+				if (p != 1)
+					while (operators != nullptr && p >= get_priority(get_front(operators)))
+					{
+						apply_bin(&operators, &output);
+					}
+				push_str(&operators, op);
+			}
+		}
+		else if (expr[i] == '('){
+			push_str(&operators, "(");
+		}
+		else if (expr[i] == ')'){
+			while (get_front(operators) != "("){
+				apply_bin(&operators, &output);
+			}
+			pop(&operators);
+		}
+		i++;
+	}
+	while (operators != nullptr){
+		apply_bin(&operators, &output);
+	}
+	return pop(&output);
+}
 int main() {
 	system("pause");
 	return 0;
