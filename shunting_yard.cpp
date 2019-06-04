@@ -53,6 +53,35 @@ void apply_bin(stack** operators, stack** output){
 	result->sons.push_back(x);
 	push_node(output, &result);
 }
+
+string get_op(char s){
+	switch (s){
+	case '+':
+		return "+";
+	case '-':
+		return "-";
+	case '/':
+		return "/";
+	case '*':
+		return "*";
+	case '^':
+		return "^";
+	case '«':
+		return "«";
+	case '=':
+		return "=";
+	default:
+		return "";
+	}
+}
+
+string delete_space(string s) {
+	string rez = "";
+	for (int i = 0; i < s.length(); i++)
+		if (s[i] != ' ')
+			rez += s[i];
+	return rez;
+}
 int main() {
 	system("pause");
 	return 0;
