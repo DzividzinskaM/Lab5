@@ -95,6 +95,26 @@ double calculator(string op, double a, double b) {
 	if (op == "^")
 		return pow(a, b);
 }
+bool is_operator(string s) {
+	if (s == "+" || s == "-" || s == "*" || s == "/" || s == "^")
+		return true;
+	return false;
+}
+int get_priority(string op)
+{
+	if (op == "«")
+		return 6;
+	if (op == "=")
+		return 5;
+	if (op == "(")
+		return 4;
+	if (op == "+" || op == "-")
+		return 3;
+	if (op == "/" || op == "*")
+		return 2;
+	if (op == "^")
+		return 1;
+}
 int main() {
 	system("pause");
 	return 0;
