@@ -17,21 +17,41 @@ void print_inf_bin(node* root){
 		print_inf_bin(root->sons[1]);
 }
 
-void push_str(stack** s, string data)
-{
+void push_str(stack** s, string data){
 	node* t = new node;
 	t->value = data;
-	stack* tmp = new stack;
-	tmp->data = t;
-	tmp->next = *s;
-	*s = tmp;
+	stack* temporary = new stack;
+	temporary->data = t;
+	temporary->next = *s;
+	*s = temporary;
 }
-void push_node(stack** s, node** node)
-{
-	stack* tmp = new stack;
-	tmp->data = *node;
-	tmp->next = *s;
-	*s = tmp;
+void push_node(stack** s, node** node){
+	stack* temporary = new stack;
+	temporary->data = *node;
+	temporary->next = *s;
+	*s = temporary;
+}
+string get_front(stack* s){
+	if (!s) return "\0";
+	return s->data->value;
+}
+
+node* pop(stack** s){
+	if (*s == nullptr) return nullptr;
+	node* t = (*s)->data;
+	stack* tmp = (*s)->next;
+	delete (*s);
+	(*s) = tmp;
+	return t;
+}
+
+void apply_bin(stack** operators, stack** output){
+	node* result;
+	result = pop(operators);
+	node* x = pop(output);
+	result->sons.push_back(pop(output));
+	result->sons.push_back(x);
+	push_node(output, &result);
 }
 int main() {
 	system("pause");
