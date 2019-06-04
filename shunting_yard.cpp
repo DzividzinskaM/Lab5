@@ -82,6 +82,19 @@ string delete_space(string s) {
 			rez += s[i];
 	return rez;
 }
+
+double calculator(string op, double a, double b) {
+	if (op == "+")
+		return a + b;
+	if (op == "-")
+		return a - b;
+	if (op == "*")
+		return a * b;
+	if (op == "/")
+		return a / b;
+	if (op == "^")
+		return pow(a, b);
+}
 int main() {
 	system("pause");
 	return 0;
