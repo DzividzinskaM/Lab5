@@ -16,6 +16,23 @@ void print_inf_bin(node* root){
 	if (root->sons.size() != 0)
 		print_inf_bin(root->sons[1]);
 }
+
+void push_str(stack** s, string data)
+{
+	node* t = new node;
+	t->value = data;
+	stack* tmp = new stack;
+	tmp->data = t;
+	tmp->next = *s;
+	*s = tmp;
+}
+void push_node(stack** s, node** node)
+{
+	stack* tmp = new stack;
+	tmp->data = *node;
+	tmp->next = *s;
+	*s = tmp;
+}
 int main() {
 	system("pause");
 	return 0;
